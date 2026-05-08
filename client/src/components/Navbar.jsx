@@ -12,7 +12,7 @@ const Navbar = () => {
       </Link>
       
       <div className="hidden md:flex items-center gap-8 text-sm font-medium text-slate-300">
-        <Link to="/" className="hover:text-white transition-colors">Find Jobs</Link>
+        <Link to="/jobs" className="hover:text-white transition-colors">Find Jobs</Link>
         <Link to="/" className="hover:text-white transition-colors">Companies</Link>
         <Link to="/" className="hover:text-white transition-colors">About Us</Link>
       </div>

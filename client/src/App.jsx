@@ -4,6 +4,8 @@ import Footer from './components/Footer';
 import Home from './pages/Home';
 import Login from './pages/Login';
 import Register from './pages/Register';
+import JobList from './pages/JobList';
+import JobDetails from './pages/JobDetails';
 
 function App() {
   return (
@@ -15,6 +17,8 @@ function App() {
             <Route path="/" element={<Home />} />
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
+            <Route path="/jobs" element={<JobList />} />
+            <Route path="/jobs/:id" element={<JobDetails />} />
           </Routes>
         </main>
         <Footer />
