@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SmartHire | Web App Interface</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: {
+                            50: '#f0f9ff', 100: '#e0f2fe', 200: '#bae6fd', 300: '#7dd3fc', 
+                            400: '#38bdf8', 500: '#0ea5e9', 600: '#0284c7', 700: '#0369a1', 
+                            800: '#075985', 900: '#0c4a6e', 950: '#082f49',
+                        },
+                    },
+                }
+            }
+        }
+    </script>
+    <style>
+        body { font-family: 'Inter', sans-serif; background-color: #020617; color: #f8fafc; overflow-x: hidden; }
+        .glass { background: rgba(255, 255, 255, 0.03); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border: 1px solid rgba(255, 255, 255, 0.08); }
+        .text-gradient { background: linear-gradient(to right, #38bdf8, #818cf8); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .page { display: none; }
+        .page.active { display: block; animation: fadeIn 0.4s ease-out; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        .nav-link.active { color: #38bdf8; position: relative; }
+        .nav-link.active::after { content: ''; position: absolute; bottom: -4px; left: 0; width: 100%; h: 2px; background: #38bdf8; border-radius: 2px; }
+    </style>
+</head>
+<body class="selection:bg-primary-500/30">
+
+    <!-- Navbar -->
+    <nav class="fixed top-0 w-full z-50 glass border-b border-white/5 px-6 py-4 flex justify-between items-center">
+        <div class="flex items-center gap-2 group cursor-pointer" onclick="showPage('home')">
+            <div class="bg-primary-600 p-2 rounded-xl group-hover:rotate-12 transition-transform duration-300">
+                <i data-lucide="briefcase" class="text-white w-5 h-5"></i>
+            </div>
+            <span class="text-2xl font-extrabold tracking-tight">Smart<span class="text-primary-400">Hire</span></span>
+        </div>
+        
+        <div class="hidden lg:flex items-center gap-10 text-sm font-medium text-slate-400">
+            <button onclick="showPage('home')" class="nav-link active hover:text-primary-400 transition-colors" id="nav-home">Home</button>
+            <button onclick="showPage('jobs')" class="nav-link hover:text-primary-400 transition-colors" id="nav-jobs">Find Jobs</button>
+            <button class="hover:text-primary-400 transition-colors">Companies</button>
+            <button class="hover:text-primary-400 transition-colors">About</button>
+        </div>
+
+        <div class="flex items-center gap-4">
+            <button onclick="showPage('login')" class="px-5 py-2 rounded-full text-sm font-semibold border border-white/10 hover:bg-white/5 transition-all">Login</button>
+            <button onclick="showPage('register')" class="px-6 py-2 rounded-full text-sm font-bold bg-primary-600 hover:bg-primary-500 transition-all shadow-lg shadow-primary-600/20">Sign Up</button>
+        </div>
+    </nav>
+
+    <!-- Content Area -->
+    <div class="pt-24 pb-20">
+        
+        <!-- HOME PAGE -->
+        <div id="page-home" class="page active">
+            <main class="max-w-7xl mx-auto px-6 text-center pt-20">
+                <h1 class="text-6xl md:text-8xl font-black tracking-tight mb-8 leading-[1.1]">
+                    Your Dream Job is <br> <span class="text-gradient">One Click Away</span>
+                </h1>
+                <p class="text-slate-400 text-xl max-w-2xl mx-auto mb-12 font-medium">
+                    Connect with 500+ top-tier companies and 10,000+ recruiters waiting for your unique skills.
+                </p>
+                <div class="max-w-4xl mx-auto glass p-3 rounded-2xl md:rounded-full flex flex-col md:flex-row items-center gap-3 shadow-2xl mb-24">
+                    <div class="flex-1 flex items-center gap-3 px-5 w-full">
+                        <i data-lucide="search" class="text-slate-500 w-5 h-5"></i>
+                        <input type="text" placeholder="Job title, keywords..." class="bg-transparent border-none outline-none text-white w-full py-3">
+                    </div>
+                    <button onclick="showPage('jobs')" class="w-full md:w-auto px-10 py-4 bg-primary-600 hover:bg-primary-500 rounded-full font-bold transition-all shadow-xl shadow-primary-600/30">
+                        Browse Jobs
+                    </button>
+                </div>
+            </main>
+        </div>
+
+        <!-- JOBS PAGE -->
+        <div id="page-jobs" class="page">
+            <div class="max-w-7xl mx-auto px-6 py-12">
+                <h2 class="text-4xl font-black mb-8">Latest Openings</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <div class="glass p-8 rounded-3xl hover:border-primary-500/30 transition-all cursor-pointer">
+                        <div class="flex justify-between items-start mb-6">
+                            <div class="w-12 h-12 bg-primary-600/10 rounded-xl flex items-center justify-center text-primary-400 font-bold text-xl">G</div>
+                            <span class="bg-green-500/10 text-green-400 px-3 py-1 rounded-full text-xs font-bold">Full-time</span>
+                        </div>
+                        <h3 class="text-2xl font-bold mb-2">Senior Developer</h3>
+                        <p class="text-slate-500 mb-6 font-medium">Google • Mountain View, CA</p>
+                        <div class="flex justify-between items-center pt-6 border-t border-white/5">
+                            <span class="text-xl font-black text-primary-400">$160k</span>
+                            <button class="text-sm font-bold text-slate-400 hover:text-white">View Details</button>
+                        </div>
+                    </div>
+                    <div class="glass p-8 rounded-3xl hover:border-primary-500/30 transition-all cursor-pointer">
+                        <div class="flex justify-between items-start mb-6">
+                            <div class="w-12 h-12 bg-primary-600/10 rounded-xl flex items-center justify-center text-primary-400 font-bold text-xl">M</div>
+                            <span class="bg-primary-500/10 text-primary-400 px-3 py-1 rounded-full text-xs font-bold">Remote</span>
+                        </div>
+                        <h3 class="text-2xl font-bold mb-2">UI Designer</h3>
+                        <p class="text-slate-500 mb-6 font-medium">Meta • Menlo Park, CA</p>
+                        <div class="flex justify-between items-center pt-6 border-t border-white/5">
+                            <span class="text-xl font-black text-primary-400">$130k</span>
+                            <button class="text-sm font-bold text-slate-400 hover:text-white">View Details</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- LOGIN PAGE -->
+        <div id="page-login" class="page">
+            <div class="max-w-md mx-auto px-6 py-12">
+                <div class="glass p-10 rounded-[40px] shadow-2xl">
+                    <h2 class="text-3xl font-black mb-2 text-center">Welcome Back</h2>
+                    <p class="text-slate-500 mb-10 text-center">Sign in to your recruiter or candidate account</p>
+                    <div class="space-y-6">
+                        <input type="email" placeholder="Email" class="w-full bg-white/5 border border-white/10 rounded-2xl py-4 px-6 outline-none focus:border-primary-500">
+                        <input type="password" placeholder="Password" class="w-full bg-white/5 border border-white/10 rounded-2xl py-4 px-6 outline-none focus:border-primary-500">
+                        <button class="w-full bg-primary-600 hover:bg-primary-500 py-4 rounded-2xl font-bold shadow-xl shadow-primary-600/20">Sign In</button>
+                    </div>
+                    <p class="mt-8 text-center text-sm text-slate-500">New here? <button onclick="showPage('register')" class="text-primary-400 font-bold">Create Account</button></p>
+                </div>
+            </div>
+        </div>
+
+        <!-- REGISTER PAGE -->
+        <div id="page-register" class="page">
+            <div class="max-w-md mx-auto px-6 py-12">
+                <div class="glass p-10 rounded-[40px] shadow-2xl">
+                    <h2 class="text-3xl font-black mb-2 text-center">Get Started</h2>
+                    <p class="text-slate-500 mb-10 text-center">Join the future of hiring</p>
+                    <div class="space-y-6">
+                        <input type="text" placeholder="Full Name" class="w-full bg-white/5 border border-white/10 rounded-2xl py-4 px-6 outline-none focus:border-primary-500">
+                        <input type="email" placeholder="Email" class="w-full bg-white/5 border border-white/10 rounded-2xl py-4 px-6 outline-none focus:border-primary-500">
+                        <input type="password" placeholder="Password" class="w-full bg-white/5 border border-white/10 rounded-2xl py-4 px-6 outline-none focus:border-primary-500">
+                        <button class="w-full bg-primary-600 hover:bg-primary-500 py-4 rounded-2xl font-bold shadow-xl shadow-primary-600/20">Create Account</button>
+                    </div>
+                    <p class="mt-8 text-center text-sm text-slate-500">Already a member? <button onclick="showPage('login')" class="text-primary-400 font-bold">Sign In</button></p>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        function showPage(pageId) {
+            // Hide all pages
+            document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+            // Remove active from nav links
+            document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
+            
+            // Show selected page
+            document.getElementById('page-' + pageId).classList.add('active');
+            // Add active to nav link if exists
+            const nav = document.getElementById('nav-' + pageId);
+            if(nav) nav.classList.add('active');
+            
+            // Scroll to top
+            window.scrollTo(0, 0);
+        }
+        lucide.createIcons();
+    </script>
+</body>
+</html>
