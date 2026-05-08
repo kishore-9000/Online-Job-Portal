@@ -2,6 +2,21 @@ import { Search, MapPin, Briefcase, TrendingUp, Users, CheckCircle } from 'lucid
 import { motion } from 'framer-motion';
 
 const Home = () => {
+  const [searchTerm, setSearchTerm] = useState('');
+  const [location, setLocation] = useState('');
+
+  const allJobs = [
+    { id: 1, title: 'Software Engineer', company: 'CloudTech', location: 'San Francisco, CA', salary: '$120k - $160k', type: 'Full-time' },
+    { id: 2, title: 'Frontend Developer', company: 'PixelPerfect', location: 'Remote', salary: '$90k - $130k', type: 'Contract' },
+    { id: 3, title: 'Product Manager', company: 'Skyline Inc', location: 'New York, NY', salary: '$140k - $180k', type: 'Full-time' },
+    { id: 4, title: 'UI/UX Designer', company: 'CreativeFlow', location: 'Austin, TX', salary: '$100k - $140k', type: 'Internship' },
+  ];
+
+  const filteredJobs = allJobs.filter(job => 
+    job.title.toLowerCase().includes(searchTerm.toLowerCase()) &&
+    job.location.toLowerCase().includes(location.toLowerCase())
+  );
+
   return (
     <div className="w-full">
       {/* Hero Section */}
@@ -33,6 +48,8 @@ const Home = () => {
                   type="text" 
                   placeholder="Job title, keywords..." 
                   className="bg-transparent border-none outline-none text-white w-full py-3"
+                  value={searchTerm}
+                  onChange={(e) => setSearchTerm(e.target.value)}
                 />
               </div>
               <div className="h-10 w-px bg-white/10 hidden md:block"></div>
@@ -42,6 +59,8 @@ const Home = () => {
                   type="text" 
                   placeholder="Location" 
                   className="bg-transparent border-none outline-none text-white w-full py-3"
+                  value={location}
+                  onChange={(e) => setLocation(e.target.value)}
                 />
               </div>
               <button className="w-full md:w-auto px-8 py-3 bg-primary-600 hover:bg-primary-500 rounded-full font-bold transition-all shadow-lg shadow-primary-500/30">
@@ -90,24 +109,28 @@ const Home = () => {
           </div>
           
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {[1, 2, 3].map((job) => (
-              <div key={job} className="glass p-6 rounded-2xl hover:bg-white/[0.07] transition-all cursor-pointer group">
+            {filteredJobs.length > 0 ? filteredJobs.map((job) => (
+              <div key={job.id} className="glass p-6 rounded-2xl hover:bg-white/[0.07] transition-all cursor-pointer group">
                 <div className="flex justify-between items-start mb-6">
                   <div className="w-12 h-12 bg-white/5 rounded-xl flex items-center justify-center font-bold text-xl">
-                    C{job}
+                    {job.company[0]}
                   </div>
                   <span className="text-xs bg-primary-500/10 text-primary-400 px-3 py-1 rounded-full border border-primary-500/20">
-                    Full-time
+                    {job.type}
                   </span>
                 </div>
-                <h3 className="text-xl font-bold mb-2 group-hover:text-primary-400 transition-colors">Software Engineer</h3>
-                <p className="text-slate-400 text-sm mb-6">CloudTech Solutions • San Francisco, CA</p>
+                <h3 className="text-xl font-bold mb-2 group-hover:text-primary-400 transition-colors">{job.title}</h3>
+                <p className="text-slate-400 text-sm mb-6">{job.company} • {job.location}</p>
                 <div className="flex justify-between items-center pt-6 border-t border-white/5">
-                  <span className="font-semibold">$120k - $160k</span>
+                  <span className="font-semibold">{job.salary}</span>
                   <button className="text-sm font-medium hover:underline">Details</button>
                 </div>
               </div>
-            ))}
+            )) : (
+              <div className="col-span-full py-20 text-center">
+                <p className="text-slate-500 text-lg">No jobs found matching your search.</p>
+              </div>
+            )}
           </div>
         </div>
       </section>

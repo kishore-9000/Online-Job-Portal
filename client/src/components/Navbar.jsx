@@ -22,11 +22,11 @@ const Navbar = () => {
           Post a Job
         </Link>
         <div className="h-6 w-px bg-white/10 mx-2 hidden sm:block"></div>
-        <Link to="/" className="flex items-center gap-2 px-4 py-2 rounded-full border border-white/10 hover:bg-white/5 transition-all">
+        <Link to="/login" className="flex items-center gap-2 px-4 py-2 rounded-full border border-white/10 hover:bg-white/5 transition-all">
           <LogIn className="w-4 h-4" />
           <span>Login</span>
         </Link>
-        <Link to="/" className="flex items-center gap-2 px-5 py-2 rounded-full bg-primary-600 hover:bg-primary-500 transition-all font-semibold shadow-lg shadow-primary-500/20">
+        <Link to="/register" className="flex items-center gap-2 px-5 py-2 rounded-full bg-primary-600 hover:bg-primary-500 transition-all font-semibold shadow-lg shadow-primary-500/20">
           <span>Sign Up</span>
         </Link>
       </div>
